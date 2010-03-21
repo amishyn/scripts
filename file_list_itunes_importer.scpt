@@ -14,8 +14,11 @@ on adding folder items to this_folder after receiving these_items
 				set the source_item to the quoted form of the POSIX path of the this_item
 				set cmd to the "/usr/local/bin/wget -P " & target_folder & " -q -i " & source_item
 				do shell script cmd
-				
-				do shell script "rm -r " & target_folder & "/*.m3u"
+
+				try
+				  do shell script "rm -r " & target_folder & "/*.m3u"
+				on error
+				end try
 				
 				set folder_alias to POSIX file target_folder
 				tell application "iTunes"
